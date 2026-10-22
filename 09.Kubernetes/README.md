@@ -50,8 +50,8 @@
   - What is a Headless Service?
 
 **🚀Exercise**
-  - Deploy a simple web application (e.g., hello-openshift) and access it outside openshift cluster.
-  Use our dev cluster on the public web
+  - Deploy a simple web application (e.g., `us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0`) and access it from outside the cluster.
+  Use our dev GKE cluster
 
 **Volumes**
   - What are Kubernetes volumes?
@@ -101,8 +101,9 @@
   - What happens when you bind a ClusterRole with a RoleBinding?
 
 **Securing cluster nodes**
-  - What is PodSecurityPolicy?
-  - Read about openshift SCC
+  - What was PodSecurityPolicy, and why was it removed in Kubernetes 1.25?
+  - Read about Pod Security Admission and the Pod Security Standards (privileged, baseline, restricted)
+  - How do you enforce a Pod Security Standard on a namespace?
   - Managing pod’s computational resources:
   - how can you limit the pod’s resources (requests, limits ,QOS etc)
   - How does the cpu request affect the system?

@@ -5,7 +5,7 @@
 
 ### Tasks
 - Install helm cli tool and experiment with helm
-- Use helm cli to create a helm chart and see what it looks likedds
+- Use helm cli to create a helm chart and see what it looks like
 - Answer the following questions:
     - What is helm and what is it used for?
     - What is a Helm chart's directory structure?
@@ -50,16 +50,6 @@
     ``` 
     - Read the helm docs about conventions and best practices
 
-    - ArgoCD
-        - Read about GitOps
-        - What are the principles of GitOps? What are the advantages?
-        - Read about ArgoCD
-        - How does ArgoCD achieve GitOps for k8s applications?
-        - Read about ArgoCD's Application and ApplicationSet resources. Why are they useful?
-        - What is a generator in applicationset? What are the different types?
-# 🚀 ArgoCD Exercise
-- Do the following course: https://academy.akuity.io/courses/gitops-argocd-intro
-
 # 🚀 DevOps Exercise
 
 🕒 **Estimated Time**: 1 full day  
@@ -96,20 +86,6 @@
 
 ---
 
-## Task 4: Bonus - Automatic Deployment via ArgoCD
+## Next: ArgoCD
 
-**Objective**: Automate deployments with ArgoCD.
-
-- Set up **ArgoCD** and **Gitea** using Helm packages on your local Minikube.
-- Commit the YAMLs and code into the local Git server (Gitea).
-- Configure ArgoCD (running on Minikube) to perform automatic deployments upon YAML/code changes.
-
-
-<br>
-
----
-
-## 🧪 2nd Exercise
-
-- Check out some of the helm charts in our tactic environment.  
-- Refer to the official [Helm documentation](https://helm.sh/docs/) to better understand chart structure and syntax.
+Keep the charts you wrote in this exercise. In [11.ArgoCD](../11.ArgoCD/README.md) you will deploy them with ArgoCD instead of running `helm install` by hand.
