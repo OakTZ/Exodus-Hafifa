@@ -5,7 +5,7 @@
 
 ### Tasks
 - Install helm cli tool and experiment with helm
-- Use helm cli to create a helm chart and see what it looks like
+- Use helm cli to create a helm chart and see what it looks likedds
 - Answer the following questions:
     - What is helm and what is it used for?
     - What is a Helm chart's directory structure?
