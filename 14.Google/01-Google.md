@@ -29,6 +29,7 @@ While doing the GKE courses, make sure you can answer:
 - What is a private cluster? How do you reach its control plane?
 - How do workloads in GKE get access to Google Cloud APIs? (Workload Identity Federation for GKE)
 - How do you expose a service in GKE: a LoadBalancer Service, Ingress, or Gateway? What does GKE create in Google Cloud for each one?
+- Our environment doesn't allow external load balancers or Cloud NAT. How do you expose a service **internally** only (internal LoadBalancer Service, internal Gateway)? How do private nodes pull images without internet access?
 - How do GKE upgrades work? What are release channels and maintenance windows?
 
 ### Lecture

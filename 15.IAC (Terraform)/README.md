@@ -7,6 +7,8 @@
 
 Terraform is the main tool our team works with. Take your time here, even if you finish early.
 
+> 🔒 **Our environment is private:** no Cloud NAT, no public IPs and no external load balancers. You will expose services with **internal** load balancers, and test and deploy from VMs inside the VPC that you connect to with **IAP Desktop**: a **Windows VM** over RDP (for the browser) and a **Linux VM** over SSH (for the command line). The lessons and the exercise are built around this.
+
 Go over the files in order:
 
 1. [01-IAC.md](./01-IAC.md) - IaC and Terraform fundamentals

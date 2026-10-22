@@ -24,6 +24,7 @@
 - Why are static credentials (client certificates, service account key files) a risk? How does GKE avoid them?
 - What is Workload Identity Federation for GKE? Why is it better than mounting a service account key in a pod?
 - Deploy a pod on GKE that reads from a GCS bucket using Workload Identity Federation, without any key files
+- What is Identity-Aware Proxy (IAP)? How does IAP TCP forwarding let you RDP or SSH to a VM that has no public IP? Which identity checks happen on the way?
 - How does ArgoCD authenticate users? Read about ArgoCD SSO with OIDC (directly, or through Dex), and how to map groups to ArgoCD RBAC roles
 
 ### References

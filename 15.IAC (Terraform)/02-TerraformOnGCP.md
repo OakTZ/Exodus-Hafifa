@@ -35,6 +35,19 @@ In this part you will learn how Terraform works with Google Cloud specifically, 
 * What is `deletion_protection` on resources like Cloud SQL and GKE? How do you destroy a resource that has it?
 * What are **labels**? Why should every resource have them? (Think cost reports)
 
+## 🔒 Private Environments
+
+Our environment doesn't allow **Cloud NAT**, **public IPs** or **external load balancers**.
+
+* How can an organization forbid these? Read about **organization policy constraints**, e.g. `constraints/compute.vmExternalIpAccess`, `constraints/compute.restrictCloudNATUsage` and `constraints/compute.restrictLoadBalancerCreationForTypes`
+* What is **Private Google Access**? How do VMs and GKE nodes without public IPs reach Google APIs (GCS, Artifact Registry, Secret Manager)?
+* Without internet access, how do GKE nodes pull public images? Read about Artifact Registry **remote repositories**
+* What is **IAP TCP forwarding**? How can you SSH or RDP to a VM without a public IP? Which firewall rule and which IAM role does it need?
+* What is **IAP Desktop**? Which protocols does it use to connect to Windows VMs and to Linux VMs? How is it different from `gcloud compute start-iap-tunnel` and `gcloud compute ssh --tunnel-through-iap`?
+* What is **OS Login**? How does it decide who can SSH to a Linux VM, and as which user?
+* What types of **internal** load balancers does Google Cloud have? What is a **proxy-only subnet**, and which load balancers need one?
+* With a private GKE control plane endpoint, where can you run `kubectl` and Terraform's `helm` / `kubernetes` providers from?
+
 ## 🔄 The Team Workflow
 
 * How should a change go from your laptop to production? (branch → merge request with the `plan` output → review → `apply`)
