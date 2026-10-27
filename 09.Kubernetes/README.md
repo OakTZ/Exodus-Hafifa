@@ -6,16 +6,42 @@
 
 ### Tasks
 
-- Read the following book: [Kubernetes in action](https://drive.google.com/file/d/1XVZp5QlZh3R9R--sPchcUV7kGlOUz6g4/view?usp=sharing)
+- Read the following book: *Kubernetes in Action, Second Edition* by Marko Lukša and Kevin Conner (Manning): https://www.manning.com/books/kubernetes-in-action-second-edition
 
   It is recommended to deploy minikube on your own VM and get hands-on experience while you are reading the book :)
 
-  **Skip the following chapters**:
+  **Skip the following chapters** (these numbers were written for the first edition; re-map them to the second edition's table of contents before trainees start):
     - 15.3
     - 17.4
     - 17.5
     - 18.2 and onwards, except Appendix A
 
+
+**Minikube checklist (do it while you read)**
+
+Start a cluster with `minikube start`, and check it with `kubectl get nodes`. For each item, run the commands, check the result, and write one sentence about what you saw. Map each item to the book chapter that covers it.
+
+1. **Pods:** run a pod with `kubectl run`, read its logs, run a command inside it with `kubectl exec`, then delete it.
+   *Done when:* the pod is gone, and nothing recreates it.
+2. **Deployments and ReplicaSets:** create a Deployment with 3 replicas. Delete one pod.
+   *Done when:* a new pod appears within seconds, and `kubectl get rs` shows why.
+3. **Rollouts:** change the image of the Deployment, then run `kubectl rollout undo`.
+   *Done when:* you can explain what happened to the old and new ReplicaSets.
+4. **Services:** expose the Deployment as a ClusterIP Service. Call it from a temporary pod (`kubectl run tmp --rm -it --image=busybox -- wget -qO- <service>`).
+   *Done when:* you see your app's response, and `kubectl get endpoints` lists the pod IPs.
+5. **Labels and selectors:** change the Service selector so it matches nothing. Then fix it.
+   *Done when:* the endpoints list is empty while it's broken, and full again after the fix.
+6. **ConfigMaps and Secrets:** create one of each, mount one as an environment variable and the other as a file. Change the values.
+   *Done when:* you can say which values updated in the running pod, and which didn't.
+7. **Storage:** share an `emptyDir` between two containers in one pod. Create a PersistentVolumeClaim, write a file to it, delete the pod, and recreate it.
+   *Done when:* the file is still there, and you can say why an `emptyDir` file would not be.
+8. **Probes and resources:** add a readiness probe that fails, then set CPU and memory requests.
+   *Done when:* the pod shows `Ready 0/1`, the Service has no endpoints, and `kubectl describe node` shows your requests in "Allocated resources".
+9. **Scheduling:** set a `nodeSelector` with a label that no node has.
+   *Done when:* the pod is `Pending`, and `kubectl describe pod` shows the reason in the events.
+10. **Namespaces and RBAC:** create a namespace, a ServiceAccount, a Role and a RoleBinding. Check them with `kubectl auth can-i --as=system:serviceaccount:<ns>:<name> <verb> <resource>`.
+    *Done when:* the answers match the Role you wrote.
+11. **Gateway API:** do the Gateway API exercise below.
 
 **Additional Sources**
 - [Certified Kubernetes Administrator course from Udemy](https://drive.google.com/drive/folders/1GNXztUdtESDTt5uefyV7n5NpofaxLPn4?usp=sharing)
@@ -53,6 +79,24 @@
   - Deploy a simple web application (e.g., `us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0`) and access it from outside the cluster.
   Use our dev GKE cluster
 
+**Exposing services: Gateway API**
+  - How does traffic from outside the cluster reach a Pod? Name every hop (external load balancer, node, Gateway, HTTPRoute, Service, Pod)
+  - Why not give every Service its own `LoadBalancer`? What does it cost, in money and in IP addresses?
+  - What is the **Gateway API**, and why is it the recommended way to expose HTTP and other traffic in Kubernetes? Read the official Gateway API page
+  - Which problems of the older Ingress API does the Gateway API solve? (Think about: who owns what, portable features, protocols other than HTTP, cross-namespace routing)
+  - Explain the Gateway API resources and who owns each one:
+    - `GatewayClass` - who creates it, and what does it point to?
+    - `Gateway` - which listeners, ports and TLS certificates does it define?
+    - `HTTPRoute` - how does it attach to a Gateway (`parentRefs`), and how does it route by host, path and header?
+    - What other route types exist (e.g. `GRPCRoute`, `TCPRoute`)? Which of them are stable?
+  - What is an **implementation** (a Gateway controller)? Name 3 implementations. Which GatewayClass names does GKE create?
+  - What is the difference between an external and an internal Gateway? What does an internal Gateway need in the subnet (connect this to the **proxy-only subnet** in 05.NetworkingAndDNS)?
+  - Write an HTTPRoute that sends `/api` to one Service and everything else to another. Which match type did you use, and why?
+  - You have an old Ingress manifest with host and path rules. Convert it to a `Gateway` and an `HTTPRoute`. Which fields moved where, and what did you have to add?
+  - Your team has legacy Ingress resources. How would you migrate them without downtime? What would you check first?
+  - **🚀 Exercise:** on minikube, install the Gateway API CRDs and a Gateway API implementation (e.g. Envoy Gateway or NGINX Gateway Fabric). Deploy two small web apps. Expose both with one `Gateway` and two `HTTPRoute`s: one by host name, one by path (`/app1`, `/app2`).
+  - **🚀 Exercise (bonus):** write a small Ingress manifest for the same two apps, convert it to Gateway API, and explain every change.
+
 **Volumes**
   - What are Kubernetes volumes?
   - If it’s possible to persist data with regular external storage volumes, why would we need PersistentVolumes? 
@@ -88,7 +132,7 @@
   - How do Pod to Pod communication works in the same node? ve (virtual ethernet)
   - How do Pod to Pod communication works, both on a different node? 
   - How Pod to Service communication works? kube-proxy, iptables, chains
-  - How External traffic from cluster to pod communication works? ingress
+  - How does external traffic reach a Pod? Follow it through a Gateway, an HTTPRoute and a Service
   - How does the kube-proxy perform load balancing across pods?
   - why the number of etcd instances should be an odd-number? 
   - Describe the flow of api request in Kubernetes (auth, RBAC, admissionController)

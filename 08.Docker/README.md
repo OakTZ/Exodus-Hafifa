@@ -89,8 +89,18 @@
   - How can we detach from a container without exiting?
 
   **More knowledge!**   
-  - Read a bit about CRI-O and rkt
+  - Read a bit about containerd and CRI-O. Which one is the default runtime on GKE, and why?
+  - What is the Container Runtime Interface (CRI)? Which component talks to containerd, and what does containerd talk to?
   - How does the Open Container Initiative help us swap out container runtimes? Briefly read the following: [Dont Panic! K8s drops Docker](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/)
+
+  **Docker-in-Docker (dind)**
+  - Read the `docker` image page on Docker Hub, the Docker-in-Docker section: https://hub.docker.com/_/docker
+  - Read GitLab's guide on building Docker images in CI: https://docs.gitlab.com/ee/ci/docker/using_docker_build.html
+  - What does the `docker:dind` image do? Why does a CI job that builds images need `privileged: true`?
+  - Why is a privileged container a security risk? What can it do to the host it runs on?
+  - Compare dind with mounting the host's `/var/run/docker.sock` into a CI job. Which one is worse, and why?
+  - Name 2 ways to build container images in CI without a privileged Docker daemon (for example kaniko, Buildah, or Cloud Build). For each one, say what it gives you and what it can't do. Check the current maintenance status of each project before you choose one.
+  - Our `dags` and `app` repositories build images in CI. Which approach would you choose on GKE, and why? (Think about Workload Identity, rootless builds, and cache)
 
 
 

@@ -16,11 +16,14 @@ On Google Skills, search the catalog for the **Professional Cloud Architect** le
 
 ### Part 2: GKE (~2 days)
 
-GKE is where our workloads run, so here you **do** the labs.
+GKE is where our workloads run, so here you **do** the labs. Do the courses **in this order**, all of them required:
 
-- **Required:** [Getting Started with Google Kubernetes Engine](https://www.skills.google/course_templates/2) (about 6 hours)
-- **Recommended:** [Architecting with Google Kubernetes Engine: Production](https://www.skills.google/course_templates/33) (about 4 hours) - GKE security, logging and monitoring, and using managed storage and databases from GKE
-- **Recommended:** [Google Kubernetes Engine Best Practices: Security](https://www.skills.google/course_templates/732) (about 2 hours) - RBAC, hardening, VPC networking and Binary Authorization
+1. [Getting Started with Google Kubernetes Engine](https://www.skills.google/paths/11/course_templates/2) (about 6 hours) - start here if Kubernetes is new to you
+2. [Manage Kubernetes in Google Cloud](https://www.skills.google/paths/13/course_templates/783) (about 30 minutes, skill badge) - `kubectl` deployments, monitoring and debugging on GKE, and continuous delivery
+3. [Architecting with Google Kubernetes Engine: Production](https://www.skills.google/paths/13/course_templates/33) (about 4 hours) - GKE security, logging and monitoring, and using managed storage and databases from GKE
+4. [Google Kubernetes Engine Best Practices: Security](https://www.skills.google/paths/15/course_templates/732) (about 2 hours) - RBAC, hardening, VPC networking and Binary Authorization
+
+Ask your mentor to confirm your Google Skills access before you start. Courses 3 and 4 assume course 1.
 
 While doing the GKE courses, make sure you can answer:
 - What is the difference between GKE Autopilot and Standard? When would you choose each one?

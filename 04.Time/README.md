@@ -2,9 +2,9 @@
 
 
 ### ntp
-- ntp
-- ntpd
-- chronyd
+- NTP and strata
+- chrony (`chronyd`, `chronyc`)
+- ntpd (legacy - for background only)
 
 ### Daylight saving time
 - DST

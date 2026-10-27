@@ -76,13 +76,22 @@
 
 ---
 
-## Task 3: Ingress Configuration
+## Task 3: Gateway API Configuration
 
-**Objective**: Set up an ingress controller to route incoming traffic to the NGINX web server.
+**Objective**: Route incoming HTTP traffic to the NGINX web server using the **Gateway API**, not the Ingress API. Ingress is frozen, so new charts should use Gateway API (see 09.Kubernetes, "Ingress and Gateway API").
 
-- Deploy an Ingress Controller (like NGINX Ingress Controller).
-- Define Ingress resources to expose the NGINX web server to external traffic.
-- Configure Ingress rules for routing HTTP requests to the NGINX server's pods.
+- Install the Gateway API CRDs on your minikube, and a Gateway API implementation (e.g. Envoy Gateway or NGINX Gateway Fabric). Write down which GatewayClass it creates.
+- Add two templates to your nginx chart:
+  - A `Gateway` that listens on HTTP port 80, with a `gatewayClassName` taken from `values.yaml`
+  - An `HTTPRoute` that attaches to the Gateway and sends requests for your host name (e.g. `nginx.local`) to the nginx Service
+- Make the whole Gateway section optional with a value (e.g. `gateway.enabled`), and default it to `true`. Explain in a comment what happens when it's `false`.
+- Route a second path (e.g. `/caller-status`) to a second backend, or add a path match to the HTTPRoute. Explain the match type you chose (`PathPrefix` or `Exact`).
+- Check it works: `curl -H "Host: nginx.local" http://<gateway-address>/` should return your page. Find the Gateway address with `kubectl get gateway`.
+- Answer the following questions:
+  - Which resource did you create for the infrastructure (the Gateway), and which one for the application (the HTTPRoute)? Who would own each in a real team?
+  - What does `parentRefs` do in the HTTPRoute?
+  - What would you change in your chart to run the same routing with an internal Gateway?
+  - What happens to the Gateway and the HTTPRoute when you run `helm uninstall`?
 
 ---
 

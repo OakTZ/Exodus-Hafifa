@@ -36,4 +36,3 @@
 7. **GitLab Setup**
    - Create a [GitLab](https://gitlab.com/) account if you don’t have one.
    - Create a repository.
-   - Use this repository to store all your **Ansible** scripts going forward.
